@@ -1,0 +1,15 @@
+name: open-charger
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */6 * * *'
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: /bin/bash fire_go.sh
